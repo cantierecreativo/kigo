@@ -184,6 +184,18 @@ module Kigo
     self.access('/updatePropertyPricingSetup', :post, { 'PROP_ID' => property_id, 'PRICING' => pricing })
   end
 
+  def self.compute_pricing(property_id, reservation_creation_date, checkin_date, checkout_date, adults_number, children_number, babies_number)
+    self.access('/computePricing', :post, {
+                  "PROP_ID" => property_id,
+                  "RES_CREATE" => reservation_creation_date,
+                  "RES_CHECK_IN" => checkin_date,
+                  "RES_CHECK_OUT" => checkout_date,
+                  "RES_N_ADULTS" => adults_number,
+                  "RES_N_CHILDREN" => children_number,
+                  "RES_N_BABIES" => babies_number
+                })
+  end
+
   def self.compute_pricing_bulk(properties_ids, reservation_creation_date, checkin_date, checkout_date, adults_number, children_number, babies_number)
     self.access('/computePricingBulk', :post, {
                   "PROP_ID" => properties_ids,
